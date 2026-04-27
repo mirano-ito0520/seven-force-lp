@@ -178,6 +178,51 @@
   .hero-meta div { font-size: 12px; color: var(--text-dim); letter-spacing: 0.15em; }
   .hero-meta strong { display: block; color: var(--gold-2); font-family: "Cormorant Garamond", serif; font-size: 26px; font-weight: 500; margin-bottom: 6px; letter-spacing: 0.05em; }
 
+  /* Whole-page warp: each section enters from below and exits into deep space */
+  @supports (animation-timeline: view()) {
+    .trust,
+    .problem,
+    .strengths,
+    .products,
+    .flow,
+    .faq,
+    .cta-final {
+      animation: sectionWarp linear;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+      transform-origin: center center;
+      will-change: transform, opacity, filter;
+    }
+  }
+  @keyframes sectionWarp {
+    0% {
+      opacity: 0.15;
+      transform: perspective(1000px) rotateX(-12deg) translateZ(-180px) translateY(80px);
+      filter: blur(4px);
+    }
+    22%, 70% {
+      opacity: 1;
+      transform: perspective(1000px) rotateX(0deg) translateZ(0) translateY(0);
+      filter: blur(0);
+    }
+    100% {
+      opacity: 0;
+      transform: perspective(1000px) rotateX(28deg) translateZ(-320px) translateY(-80px);
+      filter: blur(4px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-inner > *,
+    .crawl-content,
+    .trust, .problem, .strengths, .products, .flow, .faq, .cta-final {
+      animation: none !important;
+      transform: none !important;
+      opacity: 1 !important;
+      filter: none !important;
+    }
+  }
+
   /* Star Wars opening crawl & hero zoom-out (scroll-driven) */
   @supports (animation-timeline: view()) {
     .hero-inner > * {
