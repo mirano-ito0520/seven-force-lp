@@ -204,18 +204,18 @@
   @keyframes itemWarp {
     0% {
       opacity: 0;
-      transform: perspective(2000px) translateY(20px) scale(0.96);
-      filter: blur(1px);
+      transform: perspective(2400px) translateY(8px) scale(0.99);
+      filter: blur(0.5px);
     }
-    25%, 70% {
+    8%, 88% {
       opacity: 1;
-      transform: perspective(2000px) translateY(0) translateZ(0) scale(1);
+      transform: perspective(2400px) rotateX(0) translateY(0) translateZ(0) scale(1);
       filter: blur(0);
     }
     100% {
       opacity: 0;
-      transform: perspective(2000px) translateY(-360px) translateZ(-500px) scale(0.45);
-      filter: blur(1.5px);
+      transform: perspective(2400px) rotateX(8deg) translateY(-90px) translateZ(-180px) scale(0.78);
+      filter: blur(1px);
     }
   }
 
@@ -248,14 +248,14 @@
     .hero-inner > * {
       animation: heroZoomIntoSpace cubic-bezier(0.4, 0, 0.6, 1) both;
       animation-timeline: scroll(root);
-      animation-range: 0 130vh;
+      animation-range: 0 260vh;
     }
   }
   @keyframes heroZoomIntoSpace {
     to {
-      transform: perspective(2000px) translateY(-380px) translateZ(-500px) scale(0.4);
+      transform: perspective(2400px) rotateX(8deg) translateY(-100px) translateZ(-200px) scale(0.75);
       opacity: 0;
-      filter: blur(2px);
+      filter: blur(1px);
     }
   }
 
@@ -436,16 +436,19 @@
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1px;
-    background: var(--line);
+    gap: 0;
     border: 1px solid var(--line);
   }
   .strength-card {
-    background: var(--bg-2);
+    background: transparent;
     padding: 56px 44px;
     transition: background .25s;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
   }
-  .strength-card:hover { background: var(--bg-3); }
+  .strength-card:nth-child(2n) { border-right: none; }
+  .strength-card:nth-last-child(-n+2) { border-bottom: none; }
+  .strength-card:hover { background: rgba(74, 200, 255, 0.04); }
   .strength-card .no {
     font-family: "Cormorant Garamond", serif;
     color: var(--gold);
@@ -727,6 +730,9 @@
     section { padding: 80px 24px; }
     .trust-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 16px; }
     .strength-grid { grid-template-columns: 1fr; }
+    .strength-card { border-right: none; border-bottom: 1px solid var(--line); }
+    .strength-card:nth-last-child(-n+2) { border-bottom: 1px solid var(--line); }
+    .strength-card:last-child { border-bottom: none; }
     .product-grid { grid-template-columns: 1fr; }
     .flow-list { grid-template-columns: 1fr; }
     .nav-cta { display: none; }
