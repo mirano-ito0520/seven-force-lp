@@ -178,6 +178,99 @@
   .hero-meta div { font-size: 12px; color: var(--text-dim); letter-spacing: 0.15em; }
   .hero-meta strong { display: block; color: var(--gold-2); font-family: "Cormorant Garamond", serif; font-size: 26px; font-weight: 500; margin-bottom: 6px; letter-spacing: 0.05em; }
 
+  /* Star Wars opening crawl & hero zoom-out (scroll-driven) */
+  @supports (animation-timeline: view()) {
+    .hero-inner > * {
+      animation: heroZoomIntoSpace linear;
+      animation-timeline: scroll(root);
+      animation-range: 10vh 90vh;
+    }
+  }
+  @keyframes heroZoomIntoSpace {
+    to {
+      transform: perspective(900px) rotateX(38deg) translateZ(-220px) translateY(-40px);
+      opacity: 0;
+      filter: blur(1px);
+    }
+  }
+
+  .crawl-stage {
+    perspective: 380px;
+    perspective-origin: 50% 100%;
+    height: 90vh;
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto;
+  }
+  .crawl-content {
+    position: absolute;
+    left: 0; right: 0;
+    top: 100%;
+    margin: 0 auto;
+    width: min(640px, 88%);
+    transform-origin: 50% 100%;
+    transform: rotateX(22deg);
+    color: #ffd60a;
+    font-family: "Noto Serif JP", serif;
+    font-weight: 500;
+    text-align: justify;
+    line-height: 1.9;
+    text-shadow: 0 0 20px rgba(255, 214, 10, 0.25);
+  }
+  .crawl-content > * { margin-bottom: 28px; }
+  .crawl-content .crawl-title {
+    text-align: center;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(22px, 3.4vw, 36px);
+    letter-spacing: 0.32em;
+    margin-bottom: 56px;
+    color: #ffd60a;
+  }
+  .crawl-content .crawl-jp-title {
+    display: block;
+    margin-top: 14px;
+    font-family: "Noto Serif JP", serif;
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    color: #ffd60a;
+  }
+  .crawl-stage::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, var(--bg) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 2;
+  }
+  @supports (animation-timeline: view()) {
+    .crawl-content {
+      animation: starWarsCrawl linear;
+      animation-timeline: view();
+      animation-range: entry 0% exit 90%;
+    }
+  }
+  @keyframes starWarsCrawl {
+    0%   { top: 100%; opacity: 1; }
+    100% { top: -220%; opacity: 0.05; }
+  }
+  /* Fallback for browsers without scroll-driven animations */
+  @supports not (animation-timeline: view()) {
+    .crawl-stage { height: auto; perspective: none; }
+    .crawl-content {
+      position: relative;
+      top: auto;
+      transform: none;
+      color: var(--text);
+      text-shadow: none;
+      width: 100%;
+      max-width: 720px;
+      text-align: center;
+    }
+    .crawl-content .crawl-title { color: var(--accent); }
+    .crawl-content .crawl-jp-title { color: var(--text-dim); }
+  }
+
   /* Section common */
   section { padding: 110px 24px; }
   .section-head { text-align: center; margin-bottom: 72px; }
@@ -759,17 +852,17 @@
   </div>
 </section>
 
-<!-- PHILOSOPHY -->
+<!-- PHILOSOPHY (Star Wars opening crawl) -->
 <section class="philosophy">
-  <div class="container">
-    <p class="philosophy-quote">
-      <span class="gold">すべての人に、確信と感動を。</span><br />
-      使いたいから、使い続けたいへ
-    </p>
-    <p>
-      私たちは、髪と肌の本質的な美しさを取り戻すために、成分ひとつひとつに深く向き合ってきました。天然と科学の力を融合させ、メーカーとしての責任を果たす。それが、セブン・フォースの使命です。
-    </p>
-    <p class="force-line">MAY THE FORCE BE WITH YOU.</p>
+  <div class="crawl-stage">
+    <div class="crawl-content">
+      <p class="crawl-title">EPISODE VII<span class="crawl-jp-title">セブン・フォースの哲学</span></p>
+      <p>かつて、髪と肌の本質に向き合うひとつのメーカーが、佐賀の地で生まれた。</p>
+      <p>40年にわたる研究の蓄積と、太古の海から導き出された独自成分「フムスエキス」。それは、流行ではなく、使い続けたいと願う想いに応えるための、私たちなりの答えだった。</p>
+      <p>すべての人に、確信と感動を。「使いたい」から「使い続けたい」へ。天然と科学の力を融合させ、メーカーとしての責任を果たすこと。それが、セブン・フォースの使命である。</p>
+      <p>そしていま、その力を、あなたのサロンへ。</p>
+      <p style="text-align:center; margin-top:48px; letter-spacing:0.2em;">MAY THE FORCE BE WITH YOU.</p>
+    </div>
   </div>
 </section>
 
