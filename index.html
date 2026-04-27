@@ -178,7 +178,7 @@
   .hero-meta div { font-size: 12px; color: var(--text-dim); letter-spacing: 0.15em; }
   .hero-meta strong { display: block; color: var(--gold-2); font-family: "Cormorant Garamond", serif; font-size: 26px; font-weight: 500; margin-bottom: 6px; letter-spacing: 0.05em; }
 
-  /* Per-element warp: every element recedes into the central vanishing point */
+  /* Per-element warp: every element gently recedes toward the header (top of viewport) */
   @supports (animation-timeline: view()) {
     .section-head .eyebrow,
     .section-head h2,
@@ -194,7 +194,7 @@
     .cta-final .btn,
     .cta-contacts > div,
     .may-force {
-      animation: itemWarp cubic-bezier(0.4, 0, 0.6, 1) both;
+      animation: itemWarp cubic-bezier(0.33, 0, 0.4, 1) both;
       animation-timeline: view();
       animation-range: cover 0% cover 100%;
       transform-origin: center top;
@@ -204,18 +204,18 @@
   @keyframes itemWarp {
     0% {
       opacity: 0;
-      transform: perspective(1400px) rotateX(-4deg) translateZ(-80px) translateY(40px);
-      filter: blur(2px);
+      transform: perspective(2000px) translateY(20px) scale(0.96);
+      filter: blur(1px);
     }
-    30%, 65% {
+    25%, 70% {
       opacity: 1;
-      transform: perspective(1400px) rotateX(0) translateZ(0) translateY(0);
+      transform: perspective(2000px) translateY(0) translateZ(0) scale(1);
       filter: blur(0);
     }
     100% {
       opacity: 0;
-      transform: perspective(1400px) rotateX(38deg) translateZ(-900px) translateY(-220px) scale(0.85);
-      filter: blur(3px);
+      transform: perspective(2000px) translateY(-360px) translateZ(-500px) scale(0.45);
+      filter: blur(1.5px);
     }
   }
 
@@ -253,9 +253,9 @@
   }
   @keyframes heroZoomIntoSpace {
     to {
-      transform: perspective(1200px) rotateX(38deg) translateZ(-700px) translateY(-200px) scale(0.85);
+      transform: perspective(2000px) translateY(-380px) translateZ(-500px) scale(0.4);
       opacity: 0;
-      filter: blur(3px);
+      filter: blur(2px);
     }
   }
 
@@ -430,7 +430,7 @@
   }
 
   /* Strengths */
-  .strengths { background: var(--bg-2); }
+  .strengths { background: var(--bg); }
   .strength-grid {
     max-width: var(--max);
     margin: 0 auto;
