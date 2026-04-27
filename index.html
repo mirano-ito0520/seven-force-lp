@@ -178,36 +178,70 @@
   .hero-meta div { font-size: 12px; color: var(--text-dim); letter-spacing: 0.15em; }
   .hero-meta strong { display: block; color: var(--gold-2); font-family: "Cormorant Garamond", serif; font-size: 26px; font-weight: 500; margin-bottom: 6px; letter-spacing: 0.05em; }
 
-  /* Whole-page warp: smooth, slow diagonal recede into deep space */
+  /* Per-element warp: smooth diagonal recede, applied to each card / item */
   @supports (animation-timeline: view()) {
-    .trust,
-    .problem,
-    .strengths,
-    .products,
-    .flow,
-    .faq,
-    .cta-final {
-      animation: sectionWarp cubic-bezier(0.4, 0, 0.6, 1) both;
+    .section-head .eyebrow,
+    .section-head h2,
+    .section-head p,
+    .trust-item,
+    .problem-item,
+    .problem-bridge,
+    .strength-card,
+    .product-card,
+    .flow-step,
+    .faq-item,
+    .cta-final > .container > p,
+    .cta-final .btn,
+    .cta-contacts > div,
+    .may-force {
+      animation: itemWarp cubic-bezier(0.4, 0, 0.6, 1) both;
       animation-timeline: view();
       animation-range: cover 0% cover 100%;
       transform-origin: center center;
       will-change: transform, opacity, filter;
     }
+    /* Mirror diagonal direction on alternate cards for organic motion */
+    .trust-item:nth-child(even),
+    .problem-item:nth-child(even),
+    .strength-card:nth-child(even),
+    .product-card:nth-child(even),
+    .product-card:nth-child(3n),
+    .flow-step:nth-child(even),
+    .faq-item:nth-child(even) {
+      animation-name: itemWarpMirror;
+    }
   }
-  @keyframes sectionWarp {
+  @keyframes itemWarp {
     0% {
       opacity: 0;
-      transform: perspective(1400px) rotateX(-6deg) rotateY(10deg) translateZ(-100px) translateY(50px);
+      transform: perspective(1400px) rotateX(-6deg) rotateY(10deg) translateZ(-90px) translateY(40px);
       filter: blur(2px);
     }
-    32%, 62% {
+    30%, 65% {
       opacity: 1;
       transform: perspective(1400px) rotateX(0) rotateY(0) translateZ(0) translateY(0) translateX(0);
       filter: blur(0);
     }
     100% {
       opacity: 0;
-      transform: perspective(1400px) rotateX(14deg) rotateY(-16deg) translateZ(-650px) translateY(-90px) translateX(-40px);
+      transform: perspective(1400px) rotateX(12deg) rotateY(-18deg) translateZ(-600px) translateY(-70px) translateX(-30px);
+      filter: blur(2px);
+    }
+  }
+  @keyframes itemWarpMirror {
+    0% {
+      opacity: 0;
+      transform: perspective(1400px) rotateX(-6deg) rotateY(-10deg) translateZ(-90px) translateY(40px);
+      filter: blur(2px);
+    }
+    30%, 65% {
+      opacity: 1;
+      transform: perspective(1400px) rotateX(0) rotateY(0) translateZ(0) translateY(0) translateX(0);
+      filter: blur(0);
+    }
+    100% {
+      opacity: 0;
+      transform: perspective(1400px) rotateX(12deg) rotateY(18deg) translateZ(-600px) translateY(-70px) translateX(30px);
       filter: blur(2px);
     }
   }
@@ -215,7 +249,20 @@
   @media (prefers-reduced-motion: reduce) {
     .hero-inner > *,
     .crawl-content,
-    .trust, .problem, .strengths, .products, .flow, .faq, .cta-final {
+    .section-head .eyebrow,
+    .section-head h2,
+    .section-head p,
+    .trust-item,
+    .problem-item,
+    .problem-bridge,
+    .strength-card,
+    .product-card,
+    .flow-step,
+    .faq-item,
+    .cta-final > .container > p,
+    .cta-final .btn,
+    .cta-contacts > div,
+    .may-force {
       animation: none !important;
       transform: none !important;
       opacity: 1 !important;
