@@ -10,15 +10,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;500;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0a0a;
-    --bg-2: #141414;
-    --bg-3: #1c1c1c;
-    --line: #2a2a2a;
-    --text: #e8e6e1;
-    --text-dim: #9c9a94;
-    --gold: #c8a96a;
-    --gold-2: #e3c98a;
-    --accent: #f5efe2;
+    --bg: #04061a;
+    --bg-2: #0a0e2e;
+    --bg-3: #11163d;
+    --line: #232a4d;
+    --text: #ecedff;
+    --text-dim: #8a8db8;
+    --gold: #4ac8ff;            /* lightsaber blue (旧goldを置換) */
+    --gold-2: #6ad9ff;
+    --accent: #b656ff;
+    --saber-blue: #4ac8ff;
+    --saber-purple: #b656ff;
+    --rainbow: linear-gradient(90deg, #e63946 0%, #f4a261 16%, #ffd60a 32%, #06d6a0 50%, #00b4d8 66%, #5b6cff 82%, #b656ff 100%);
     --max: 1180px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -54,8 +57,11 @@
     font-family: "Cormorant Garamond", serif;
     font-size: 22px;
     letter-spacing: 0.18em;
-    color: var(--gold-2);
-    font-weight: 500;
+    background: var(--rainbow);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 700;
   }
   .logo small { display: block; font-size: 10px; letter-spacing: 0.3em; color: var(--text-dim); margin-top: 2px; font-family: "Noto Sans JP", sans-serif; }
   .nav-cta {
@@ -78,18 +84,34 @@
     align-items: center;
     overflow: hidden;
     background:
-      radial-gradient(ellipse at top right, rgba(200,169,106,0.10), transparent 55%),
-      radial-gradient(ellipse at bottom left, rgba(200,169,106,0.06), transparent 60%),
-      var(--bg);
+      radial-gradient(ellipse at top right, rgba(74,200,255,0.10), transparent 55%),
+      radial-gradient(ellipse at bottom left, rgba(182,86,255,0.10), transparent 60%),
+      radial-gradient(ellipse at 70% 80%, rgba(230,57,70,0.06), transparent 50%),
+      linear-gradient(180deg, #04061a 0%, #0a0e2e 100%);
   }
   .hero::before {
     content: "";
     position: absolute; inset: 0;
     background-image:
-      linear-gradient(rgba(200,169,106,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(200,169,106,0.04) 1px, transparent 1px);
-    background-size: 48px 48px;
-    mask: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+      radial-gradient(1.5px 1.5px at 12% 18%, #fff, transparent),
+      radial-gradient(1px 1px at 28% 62%, #ecedff, transparent),
+      radial-gradient(2px 2px at 47% 28%, #fff, transparent),
+      radial-gradient(1px 1px at 62% 78%, #b656ff, transparent),
+      radial-gradient(1.5px 1.5px at 78% 12%, #4ac8ff, transparent),
+      radial-gradient(1px 1px at 88% 56%, #fff, transparent),
+      radial-gradient(1px 1px at 8% 86%, #6ad9ff, transparent),
+      radial-gradient(2px 2px at 36% 92%, #fff, transparent),
+      radial-gradient(1px 1px at 92% 88%, #ffd60a, transparent);
+    background-repeat: no-repeat;
+    pointer-events: none;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: var(--rainbow);
+    opacity: 0.6;
   }
   .hero-inner { max-width: var(--max); margin: 0 auto; position: relative; }
   .hero-eyebrow {
@@ -100,7 +122,7 @@
     display: flex; align-items: center; gap: 14px;
   }
   .hero-eyebrow::before {
-    content: ""; width: 36px; height: 1px; background: var(--gold);
+    content: ""; width: 36px; height: 1px; background: var(--rainbow);
   }
   .hero h1 {
     font-family: "Noto Serif JP", serif;
@@ -110,7 +132,13 @@
     letter-spacing: 0.02em;
     margin-bottom: 32px;
   }
-  .hero h1 .gold { color: var(--gold-2); }
+  .hero h1 .gold {
+    background: var(--rainbow);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 700;
+  }
   .hero-lead {
     font-size: clamp(15px, 1.4vw, 18px);
     color: var(--text-dim);
@@ -130,10 +158,11 @@
     border: none;
   }
   .btn-primary {
-    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-2) 100%);
-    color: #000;
+    background: linear-gradient(135deg, #4ac8ff 0%, #5b6cff 100%);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(74,200,255,0.35), 0 0 40px rgba(91,108,255,0.18);
   }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(200,169,106,0.25); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 28px rgba(74,200,255,0.55), 0 0 60px rgba(91,108,255,0.30); }
   .btn-ghost {
     background: transparent;
     color: var(--text);
@@ -183,7 +212,14 @@
     padding: 56px 24px;
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
+    position: relative;
   }
+  .trust::before, .trust::after {
+    content: ""; position: absolute; left: 0; right: 0; height: 1px;
+    background: var(--rainbow); opacity: 0.5;
+  }
+  .trust::before { top: -1px; }
+  .trust::after { bottom: -1px; }
   .trust-grid {
     max-width: var(--max);
     margin: 0 auto;
@@ -349,10 +385,37 @@
   /* Philosophy */
   .philosophy {
     background:
-      radial-gradient(ellipse at center, rgba(200,169,106,0.08), transparent 70%),
+      radial-gradient(ellipse at center, rgba(74,200,255,0.10), transparent 60%),
+      radial-gradient(ellipse at 30% 40%, rgba(182,86,255,0.08), transparent 50%),
       var(--bg);
     text-align: center;
     padding: 140px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .philosophy::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 22% 30%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 70% 60%, #b656ff, transparent),
+      radial-gradient(1px 1px at 88% 25%, #4ac8ff, transparent),
+      radial-gradient(1px 1px at 15% 78%, #ffd60a, transparent),
+      radial-gradient(1.5px 1.5px at 55% 88%, #fff, transparent);
+    background-repeat: no-repeat;
+    pointer-events: none;
+  }
+  .philosophy > .container { position: relative; z-index: 1; }
+  .force-line {
+    margin-top: 48px;
+    font-family: "Cormorant Garamond", serif;
+    letter-spacing: 0.32em;
+    font-size: 14px;
+    background: var(--rainbow);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 500;
   }
   .philosophy-quote {
     font-family: "Noto Serif JP", serif;
@@ -417,11 +480,36 @@
   /* CTA Final */
   .cta-final {
     background:
-      linear-gradient(135deg, rgba(200,169,106,0.06), transparent),
+      linear-gradient(135deg, rgba(74,200,255,0.08), transparent),
+      radial-gradient(ellipse at 80% 30%, rgba(182,86,255,0.08), transparent 50%),
       var(--bg);
     text-align: center;
     padding: 130px 24px;
     border-top: 1px solid var(--line);
+    position: relative;
+  }
+  .cta-final::before {
+    content: ""; position: absolute; top: -1px; left: 0; right: 0; height: 1px;
+    background: var(--rainbow); opacity: 0.7;
+  }
+  .may-force {
+    margin-top: 56px;
+    font-family: "Cormorant Garamond", serif;
+    letter-spacing: 0.28em;
+    font-size: 12px;
+    background: var(--rainbow);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 500;
+  }
+  .may-force-jp {
+    display: block;
+    margin-top: 6px;
+    font-family: "Noto Serif JP", serif;
+    color: var(--text-dim);
+    font-size: 11px;
+    letter-spacing: 0.3em;
   }
   .cta-final h2 {
     font-family: "Noto Serif JP", serif;
@@ -503,7 +591,7 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-eyebrow">SEVEN FORCE｜HAIR &amp; SKIN MANUFACTURER</div>
+    <div class="hero-eyebrow">7FORCE｜HAIR &amp; SKIN MANUFACTURER</div>
     <h1>
       お客様が<br />
       <span class="gold">「使い続けたい」</span>と言う、<br />
@@ -681,6 +769,7 @@
     <p>
       私たちは、髪と肌の本質的な美しさを取り戻すために、成分ひとつひとつに深く向き合ってきました。天然と科学の力を融合させ、メーカーとしての責任を果たす。それが、セブン・フォースの使命です。
     </p>
+    <p class="force-line">MAY THE FORCE BE WITH YOU.</p>
   </div>
 </section>
 
@@ -727,6 +816,7 @@
       <div><strong>0952-97-5832</strong>FAX</div>
       <div><strong>SAGA, JAPAN</strong>佐賀県</div>
     </div>
+    <p class="may-force">MAY THE FORCE BE WITH YOUR SALON.<span class="may-force-jp">フォースと共にあらんことを。</span></p>
   </div>
 </section>
 
