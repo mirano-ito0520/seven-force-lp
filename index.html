@@ -207,7 +207,7 @@
       transform: perspective(2400px) translateY(8px) scale(0.99);
       filter: blur(0.5px);
     }
-    8%, 55% {
+    8%, 70% {
       opacity: 1;
       transform: perspective(2400px) rotateX(0) translateZ(0) scale(1);
       filter: blur(0);
@@ -248,11 +248,11 @@
     .hero-inner > * {
       animation: heroZoomIntoSpace cubic-bezier(0.4, 0, 0.6, 1) both;
       animation-timeline: scroll(root);
-      animation-range: 0 180vh;
+      animation-range: 0 220vh;
     }
   }
   @keyframes heroZoomIntoSpace {
-    0%, 25% {
+    0%, 12% {
       transform: perspective(2400px) rotateX(0) translateZ(0) scale(1);
       opacity: 1;
       filter: blur(0);
